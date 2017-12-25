@@ -1,0 +1,51 @@
+---
+- name: Install required apt packages
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - duplicity
+    - gnupg
+    - lftp
+    - python-pip
+
+- name: Install required pip packages
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - boto
+
+- name: Get current duplicity-backup version
+  shell: "/usr/local/bin/duplicity-backup --version || true"
+  check_mode: no
+  register: duplicity_backup_version_cmd
+
+- name: Install duplicity-backup wrapper
+  get_url:
+    url: https://github.com/Luzifer/duplicity-backup/releases/download/v0.8.2/duplicity-backup_linux_amd64
+    dest: /usr/local/bin/duplicity-backup
+    force: yes
+    mode: 0755
+  when: duplicity_backup_version not in duplicity_backup_version_cmd.stdout
+
+- name: Deploy duplicity-s3 configuration
+  template:
+    src: duplicity-backup.yaml.j2
+    dest: /etc/duplicity-backup.yaml
+
+- name: Set up cron for backups
+  cron:
+    name: Duplicity Backup
+    special_time: hourly
+    job: /usr/local/bin/duplicity-backup -f /etc/duplicity-backup.yaml backup
+    user: root
+    cron_file: duplicity
+
+- name: Add cronjob to clean logs
+  cron:
+    name: Cleanup logs
+    special_time: daily
+    job: /usr/bin/find /var/log/duplicity -type f -mtime +14 -delete
+    cron_file: duplicity
+    user: root
