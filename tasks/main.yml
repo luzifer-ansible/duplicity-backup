@@ -1,4 +1,5 @@
 ---
+
 - name: Install required apt packages
   apt:
     name: "{{ item }}"
@@ -49,3 +50,10 @@
     job: /usr/bin/find /var/log/duplicity -type f -mtime +14 -delete
     cron_file: duplicity
     user: root
+
+- name: Ensure .config directory used by duplicity
+  file:
+    dest: /root/.config
+    state: directory
+
+...
