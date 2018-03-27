@@ -20,7 +20,7 @@
 - name: Get current duplicity-backup version
   shell: "/usr/local/bin/duplicity-backup --version || true"
   check_mode: no
-  changed: no
+  changed_when: no
   register: duplicity_backup_version_cmd
 
 - name: Install duplicity-backup wrapper
