@@ -1,3 +1,7 @@
+# 0.1.3 / 2018-03-27
+
+  * Fix: Attribute name
+
 # 0.1.2 / 2018-03-27
 
   * Do not log changes with query tasks
