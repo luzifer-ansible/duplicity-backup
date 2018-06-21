@@ -1,3 +1,7 @@
+# 0.2.0 / 2018-06-22
+
+  * Be more nice to the machine
+
 # 0.1.3 / 2018-03-27
 
   * Fix: Attribute name
