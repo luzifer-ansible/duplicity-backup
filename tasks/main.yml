@@ -40,7 +40,7 @@
   cron:
     name: Duplicity Backup
     special_time: hourly
-    job: /usr/local/bin/duplicity-backup -f /etc/duplicity-backup.yaml backup
+    job: /usr/bin/ionice -c3 /usr/bin/nice -n19 /usr/local/bin/duplicity-backup -f /etc/duplicity-backup.yaml backup
     user: root
     cron_file: duplicity
 
