@@ -1,3 +1,7 @@
+# 1.0.0 / 2018-10-08
+
+  * Breaking: Port to new release format
+
 # 0.2.0 / 2018-06-22
 
   * Be more nice to the machine
