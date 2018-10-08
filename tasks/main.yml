@@ -24,12 +24,16 @@
   register: duplicity_backup_version_cmd
 
 - name: Install duplicity-backup wrapper
-  get_url:
-    url: https://github.com/Luzifer/duplicity-backup/releases/download/v0.8.2/duplicity-backup_linux_amd64
-    dest: /usr/local/bin/duplicity-backup
-    force: yes
-    mode: 0755
+  unarchive:
+    remote_src: true
+    src: "https://github.com/Luzifer/duplicity-backup/releases/download/{{ duplicity_backup_version }}/duplicity-backup_linux_amd64.tar.gz"
+    dest: /usr/local/bin
   when: duplicity_backup_version not in duplicity_backup_version_cmd.stdout
+  register: duplicity_backup_unarchive
+
+- name: Move new duplicity-backup version in place
+  command: mv /usr/local/bin/duplicity-backup_linux_amd64 /usr/local/bin/duplicity-backup
+  when: duplicity_backup_unarchive.changed
 
 - name: Deploy duplicity-s3 configuration
   template:
