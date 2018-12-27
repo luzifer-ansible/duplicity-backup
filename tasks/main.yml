@@ -9,12 +9,10 @@
       - python-pip
     update_cache: yes
 
-- name: Install required pip packages
+- name: Install required pip package
   pip:
-    name: "{{ item }}"
+    name: boto
     state: latest
-  with_items:
-    - boto
 
 - name: Get current duplicity-backup version
   shell: "/usr/local/bin/duplicity-backup --version || true"
