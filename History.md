@@ -1,3 +1,7 @@
+# 1.0.1 / 2018-12-27
+
+  * Fix deprecation warning (Ansible 2.7)
+
 # 1.0.0 / 2018-10-08
 
   * Breaking: Port to new release format
