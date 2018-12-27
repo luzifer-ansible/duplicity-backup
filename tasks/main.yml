@@ -2,13 +2,12 @@
 
 - name: Install required apt packages
   apt:
-    name: "{{ item }}"
+    name:
+      - duplicity
+      - gnupg
+      - lftp
+      - python-pip
     update_cache: yes
-  with_items:
-    - duplicity
-    - gnupg
-    - lftp
-    - python-pip
 
 - name: Install required pip packages
   pip:
