@@ -1,3 +1,7 @@
+# 1.1.0 / 2019-08-17
+
+  * Update default version to latest
+
 # 1.0.2 / 2018-12-27
 
   * Fix deprecation warning (Ansible 2.7)
