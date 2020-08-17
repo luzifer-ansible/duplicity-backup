@@ -1,3 +1,7 @@
+# 1.1.1 / 2020-08-17
+
+  * Work around Duplicity bug overwriting backup job
+
 # 1.1.0 / 2019-08-17
 
   * Update default version to latest
