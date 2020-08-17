@@ -37,14 +37,6 @@
     src: duplicity-backup.yaml.j2
     dest: /etc/duplicity-backup.yaml
 
-- name: Set up cron for backups
-  cron:
-    name: Duplicity Backup
-    special_time: hourly
-    job: /usr/bin/ionice -c3 /usr/bin/nice -n19 /usr/local/bin/duplicity-backup -f /etc/duplicity-backup.yaml backup
-    user: root
-    cron_file: duplicity
-
 - name: Add cronjob to clean logs
   cron:
     name: Cleanup logs
@@ -52,6 +44,14 @@
     job: /usr/bin/find /var/log/duplicity -type f -mtime +14 -delete
     cron_file: duplicity
     user: root
+
+- name: Set up cron for backups
+  cron:
+    name: Duplicity Backup
+    special_time: hourly
+    job: /usr/bin/ionice -c3 /usr/bin/nice -n19 /usr/local/bin/duplicity-backup -f /etc/duplicity-backup.yaml backup
+    user: root
+    cron_file: duplicity
 
 - name: Ensure .config directory used by duplicity
   file:
