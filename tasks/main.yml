@@ -8,6 +8,17 @@
       - lftp
       - python-pip
     update_cache: yes
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version != '20.04'
+
+- name: Install required apt packages
+  apt:
+    name:
+      - duplicity
+      - gnupg
+      - lftp
+      - python3-pip
+    update_cache: yes
+    when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '20.04'
 
 - name: Install required pip package
   pip:
