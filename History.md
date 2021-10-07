@@ -1,3 +1,7 @@
+# 1.2.0 / 2021-10-07
+
+  * Add support for Ubuntu 20.04
+
 # 1.1.1 / 2020-08-17
 
   * Work around Duplicity bug overwriting backup job
